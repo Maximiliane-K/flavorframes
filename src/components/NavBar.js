@@ -29,6 +29,9 @@ const NavBar = () => {
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link>
+              <i className="fas fa-home"></i>Home
+            </Nav.Link>
+            <Nav.Link>
               <i className="fas fa-sign-in-alt"></i>Sing in
             </Nav.Link>
             <Nav.Link>
