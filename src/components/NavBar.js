@@ -1,27 +1,19 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from '../assets/flavorframe-logo.png';
+import styles from "../styles/NavBar.module.css";
 
 const NavBar = () => {
   return (
-    <Navbar bg="light" expand="md" fixed="top">
+    <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
         <Navbar.Brand>
-          <img src={logo} alt="logo" height="80"/>
+          <img src={logo} height="150" alt="logo"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
-            <Nav.Link href="#home">
-              <i className="fas fa-home"></i>Home
-            </Nav.Link>
-            <Nav.Link href="#link">
-              <i className="fas fa-sign-in-alt"></i>Sing in
-            </Nav.Link>
-            <Nav.Link href="#link">
-              <i className="fas fa-user-plus"></i>Sing up
-            </Nav.Link>
-            <NavDropdown title="Discover" id="basic-nav-dropdown">
+          <NavDropdown title="Discover" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">
                 <i className="fas fa-bookmark"></i>Bookmarks
               </NavDropdown.Item>
@@ -36,6 +28,12 @@ const NavBar = () => {
                 <i className="fas fa-newspaper"></i>Feed
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link>
+              <i className="fas fa-sign-in-alt"></i>Sing in
+            </Nav.Link>
+            <Nav.Link>
+              <i className="fas fa-user-plus"></i>Sing up
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -43,4 +41,4 @@ const NavBar = () => {
   );
 };
   
-  export default NavBar;
+export default NavBar;
