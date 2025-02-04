@@ -16,6 +16,9 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL;
+console.log("API URL:", API_URL); // Debugging: Check if the API URL is loading correctly
+
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
     username: "",
@@ -38,11 +41,19 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(signUpData);
-      await axios.post("/dj-rest-auth/registration/", signUpData);
+      console.log("Submitting signup data:", signUpData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/dj-rest-auth/registration/`,
+        signUpData,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log("Signup success:", response.data);
       history.push("/signin");
     } catch (err) {
-      console.error("Signup error:", err);
+      console.error("Signup error:", err.response?.data || err.message);
       setErrors(
         err.response?.data || {
           general: ["Something went wrong. Please try again."],
@@ -50,7 +61,7 @@ const SignUpForm = () => {
       );
     }
   };
-
+  
   return (
     <Row className={styles.Row}>
       <Col className="my-auto py-2 p-md-2" md={6}>
