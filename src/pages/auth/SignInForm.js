@@ -35,6 +35,21 @@ const SignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+  
+    // Manual client-side validation
+    const newErrors = {};
+    if (!signInData.username.trim()) {
+      newErrors.username = ["This field may not be blank."];
+    }
+    if (!signInData.password.trim()) {
+      newErrors.password = ["This field may not be blank."];
+    }
+  
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+  
     try {
       await axios.post("/dj-rest-auth/login/", signInData);
       history.push("/");
@@ -53,7 +68,7 @@ const SignInForm = () => {
             <Form.Group controlId="username">
               <Form.Label className="d-none">Username</Form.Label>
               <Form.Control
-                className={styles.Input}
+                className={`${styles.Input} ${errors.username ? styles.ErrorInput : ""}`}
                 type="text"
                 placeholder="Username"
                 name="username"
@@ -70,7 +85,7 @@ const SignInForm = () => {
             <Form.Group controlId="password">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
-                className={styles.Input}
+                className={`${styles.Input} ${errors.password ? styles.ErrorInput : ""}`}
                 type="password"
                 placeholder="Password"
                 name="password"
@@ -107,7 +122,6 @@ const SignInForm = () => {
         md={6}
         className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
       >
-
         <Image
           className={`${appStyles.FillerImage}`}
           src={
