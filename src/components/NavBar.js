@@ -1,22 +1,45 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import logo from '../assets/flavorframes-logo-3.png';
+import logo from "../assets/flavorframes-logo-3.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 const NavBar = () => {
+  const currentUser = useCurrentUser();
+
+  const loggedInIcons = <>{currentUser?.username}</>
+  const loggedOutIcons = (
+    <>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/signin"
+      >
+        <i className="fas fa-sign-in-alt"></i>Sing in
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/signup"
+      >
+        <i className="fas fa-user-plus"></i>Sing up
+      </NavLink>
+    </>
+  );
+
   return (
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} height="150" alt="logo"/>
+            <img src={logo} height="150" alt="logo" />
           </Navbar.Brand>
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
-          <NavDropdown title="Discover" id="basic-nav-dropdown">
+            <NavDropdown title="Discover" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">
                 <i className="fas fa-bookmark"></i>Bookmarks
               </NavDropdown.Item>
@@ -31,33 +54,20 @@ const NavBar = () => {
                 <i className="fas fa-newspaper"></i>Feed
               </NavDropdown.Item>
             </NavDropdown>
-            <NavLink 
+            <NavLink
               exact
-              className={styles.NavLink} 
-              activeClassName={styles.Active} 
+              className={styles.NavLink}
+              activeClassName={styles.Active}
               to="/"
             >
               <i className="fas fa-home"></i>Home
             </NavLink>
-            <NavLink 
-              className={styles.NavLink} 
-              activeClassName={styles.Active} 
-              to="/signin"
-            >
-              <i className="fas fa-sign-in-alt"></i>Sing in
-            </NavLink>
-            <NavLink 
-              className={styles.NavLink} 
-              activeClassName={styles.Active} 
-              to="/signup"
-            >
-              <i className="fas fa-user-plus"></i>Sing up
-            </NavLink>
+            {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
-  
+
 export default NavBar;

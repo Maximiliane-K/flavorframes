@@ -15,8 +15,12 @@ import {
   Container,
   Alert,
 } from "react-bootstrap";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+
 
 const SignInForm = () => {
+  const setCurrentUser = useSetCurrentUser();
+
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
@@ -51,7 +55,8 @@ const SignInForm = () => {
     }
   
     try {
-      await axios.post("/dj-rest-auth/login/", signInData);
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
       setErrors(err.response?.data || {});
