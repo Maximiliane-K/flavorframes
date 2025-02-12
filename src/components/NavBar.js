@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/flavorframes-logo-3.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
@@ -41,6 +41,13 @@ const NavBar = () => {
         to="/feed"
       >
         <i className="fas fa-bars"></i>Feed
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/bookmarks"
+      >
+        <i className="fas fa-bookmark"></i>Bookmarks
       </NavLink>
       <NavLink
         className={styles.NavLink}
@@ -91,21 +98,6 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
-            <NavDropdown title="Discover" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
-                <i className="fas fa-bookmark"></i>Bookmarks
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                <i className="fas fa-plus-circle"></i>Add Post
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                <i className="fas fa-user"></i>Profile
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                <i className="fas fa-newspaper"></i>Feed
-              </NavDropdown.Item>
-            </NavDropdown>
             <NavLink
               exact
               className={styles.NavLink}
