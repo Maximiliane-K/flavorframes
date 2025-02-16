@@ -34,7 +34,7 @@ function App() {
             render={() => (
               <PostsPage 
                 message="No results found. Adjust the search keyword or follow a user."
-                filter={`owner__followed__owner__profile=${profile_id}&`}
+                filter={`owner__user_followed_by__follower=${profile_id}&`}
               />
           )} 
         />
@@ -44,7 +44,7 @@ function App() {
             render={() => (
               <PostsPage 
                 message="No results found. Adjust the search keyword or like a post"
-                filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`} 
+                filter={`liked_by__user=${profile_id}&ordering=-liked_by__timestamp`} 
               />
             )} 
           />
