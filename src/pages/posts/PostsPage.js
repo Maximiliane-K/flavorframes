@@ -14,6 +14,8 @@ import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
 import NoResults from "../../assets/no-results.png";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchMoreData } from "../../utils/utils";
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -37,6 +39,7 @@ function PostsPage({ message, filter = "" }) {
     const timer = setTimeout(() => {
       fetchPosts();
     }, 1000);
+
     return () => {
       clearTimeout(timer);
     };
@@ -49,7 +52,7 @@ function PostsPage({ message, filter = "" }) {
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <Form
           className={styles.SearchBar}
-          onsubmit={(event) => event.PreventDefault()}
+          onSubmit={(event) => event.preventDefault()}
         >
           <Form.Control
             value={query}
@@ -59,12 +62,19 @@ function PostsPage({ message, filter = "" }) {
             placeholder="Search posts"
           />
         </Form>
+
         {hasLoaded ? (
           <>
             {posts.results.length ? (
-              posts.results.map((post) => (
-                <Post key={post.id} {...post} setPosts={setPosts} />
-              ))
+              <InfiniteScroll
+                children={posts.results.map((post) => (
+                  <Post key={post.id} {...post} setPosts={setPosts} />
+                ))}
+                dataLength={posts.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!posts.next}
+                next={() => fetchMoreData(posts, setPosts)}
+              />
             ) : (
               <Container className={appStyles.Content}>
                 <Asset src={NoResults} message={message} />
