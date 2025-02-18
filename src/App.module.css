@@ -32,11 +32,12 @@
 }
   
 a {
-  color: #ffb366; 
+  color: #969696;
   transition: color ease-in-out 0.3s;
 }
   
 a:hover {
+  color: #ffb366; 
   text-decoration: none;
 }
   
@@ -59,7 +60,7 @@ i {
 i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
-  color: #b6e8ab;
+  color: #ffb366;
 }
 
 figure {
