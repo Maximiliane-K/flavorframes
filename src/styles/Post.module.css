@@ -22,3 +22,17 @@
   .HeartOutline:hover {
     color: #f85032;
   }
+
+  /* location icon */
+  .locationIcon {
+    color: #ffb366 !important;  
+    font-size: 1.4rem;
+    padding-right: 5px;
+    vertical-align: middle;
+  }
+  .locationIcon:hover {
+    color: #ffb366 !important;
+    cursor: pointer;
+  }
+  
+  

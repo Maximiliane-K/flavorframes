@@ -22,6 +22,7 @@ const Post = (props) => {
     updated_at,
     postPage,
     setPosts,
+    location_link,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -98,6 +99,15 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
+        {location_link && (
+          <p>
+            <i className={`fas fa-map-marker-alt ${styles.locationIcon}`}></i> 
+            <a href={location_link} target="_blank" rel="noopener noreferrer">
+              View on Google Maps
+            </a>
+          </p>
+        )}
+
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger
