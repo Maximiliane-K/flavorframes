@@ -4,13 +4,14 @@ import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Profile from "./Profile";
 
 const PopularProfiles = ({ mobile }) => {
   const [profileData, setProfileData] = useState({
     pageProfile: { results: [] },
-    PopularProfiles: { results: [] },
+    popularProfiles: { results: [] },
   });
-  const { PopularProfiles } = profileData;
+  const { popularProfiles } = profileData;
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const PopularProfiles = ({ mobile }) => {
         );
         setProfileData((prevState) => ({
           ...prevState,
-          PopularProfiles: data,
+          popularProfiles: data,
         }));
       } catch (err) {
         console.log(err);
@@ -30,24 +31,25 @@ const PopularProfiles = ({ mobile }) => {
 
     handleMount();
   }, [currentUser]);
+
   return (
     <Container
       className={`${appStyles.Content} ${
         mobile && "d-lg-none text-center mb-3"
       }`}
     >
-      {PopularProfiles.results.length ? (
+      {popularProfiles.results.length ? (
         <>
           <p>Most followed profiles.</p>
           {mobile ? (
             <div className="d-flex justify-content-around">
-              {PopularProfiles.results.map((profile) => (
-                <p key={profile.id}>{profile.owner}</p>
+              {popularProfiles.results.slice(0, 4).map((profile) => (
+                <Profile key={profile.id} profile={profile} mobile />
               ))}
             </div>
           ) : (
-            PopularProfiles.results.map((profile) => (
-              <p key={profile.id}>{profile.owner}</p>
+            popularProfiles.results.map((profile) => (
+              <Profile key={profile.id} profile={profile} />
             ))
           )}
         </>
