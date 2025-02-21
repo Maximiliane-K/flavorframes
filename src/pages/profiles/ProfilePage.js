@@ -23,6 +23,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -60,51 +61,60 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-      <Row noGutters className="px-3 text-center">
-        <Col lg={3} className="text-lg-left">
-          <Image
-            className={styles.ProfileImage}
-            roundedCircle
-            src={profile?.profile_image}
-          />
-        </Col>
-        <Col lg={6}>
-          <h3 className="m-2">{profile?.owner}</h3>
-          <Row className="justify-content-center no-gutters">
-            <Col xs={3} className="my-2">
-              <div>{profile?.posts_count}</div>
-              <div>posts</div>
-            </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.followers_count}</div>
-              <div>followers</div>
-            </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.following_count}</div>
-              <div>following</div>
-            </Col>
-          </Row>
-        </Col>
-        <Col lg={3} className="text-lg-right">
-          {currentUser &&
-            !is_owner &&
-            (profile?.following_id ? (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={() => handleUnfollow(profile)}
-              >
-                unfollow
-              </Button>
-            ) : (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => handleFollow(profile)}
-              >
-                follow
-              </Button>
-            ))}
-        </Col>
-        {profile?.content && <Col className="p-3">{profile.content}</Col>}
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      <Row
+        noGutters
+        className="px-3 text-center d-flex flex-column align-items-center"
+      >
+        <Image
+          className={styles.ProfileImage}
+          roundedCircle
+          src={profile?.profile_image}
+        />
+
+        <h3 className="mt-3">{profile?.owner}</h3>
+
+        {currentUser && !is_owner && (
+          <Button
+            className={`${btnStyles.Button} ${
+              profile?.following_id ? btnStyles.BlackOutline : btnStyles.Black
+            } mt-2`} // Keeps the original styles
+            onClick={() =>
+              profile?.following_id
+                ? handleUnfollow(profile)
+                : handleFollow(profile)
+            }
+          >
+            {profile?.following_id ? "Unfollow" : "Follow"}
+          </Button>
+        )}
+
+        {profile?.city && (
+          <p className="d-flex align-items-center text-muted mt-3">
+            <i className="fa-solid fa-location-dot me-2"></i> {profile.city}
+          </p>
+        )}
+
+        <Row className="justify-content-center mt-3 w-100">
+          <Col xs={3} className="text-center">
+            <strong>{profile?.posts_count}</strong>
+            <div>posts</div>
+          </Col>
+          <Col xs={3} className="text-center">
+            <strong>{profile?.followers_count}</strong>
+            <div>followers</div>
+          </Col>
+          <Col xs={3} className="text-center">
+            <strong>{profile?.following_count}</strong>
+            <div>following</div>
+          </Col>
+        </Row>
+
+        {profile?.about && (
+          <Col className="mt-4 px-3">
+            <p className="text-center">{profile.about}</p>
+          </Col>
+        )}
       </Row>
     </>
   );
