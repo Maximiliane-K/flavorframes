@@ -41,23 +41,30 @@ function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{ data: pageProfile }, { data: profilePosts }] =
-          await Promise.all([
-            axiosReq.get(`/profiles/${id}/`),
-            axiosReq.get(`/posts/?owner__profile=${id}`),
-          ]);
+        const [{ data: pageProfile }] = await Promise.all([
+          axiosReq.get(`/profiles/${id}/`),
+        ]);
+
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
         }));
-        setProfilePosts(profilePosts);
+
+        if (pageProfile?.owner) {
+          const { data: profilePosts } = await axiosReq.get(
+            `/posts/?owner__username=${pageProfile.owner}` 
+          );
+          setProfilePosts(profilePosts);
+        }
+
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [id, setProfileData]);
+}, [id, setProfileData]);
+
 
   const mainProfile = (
     <>
@@ -78,7 +85,7 @@ function ProfilePage() {
           <Button
             className={`${btnStyles.Button} ${
               profile?.following_id ? btnStyles.BlackOutline : btnStyles.Black
-            } mt-2`} // Keeps the original styles
+            } mt-2`}
             onClick={() =>
               profile?.following_id
                 ? handleUnfollow(profile)
