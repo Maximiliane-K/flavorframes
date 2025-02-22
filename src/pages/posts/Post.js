@@ -78,7 +78,7 @@ const Post = (props) => {
     <Card className={styles.Post}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`}>
+          <Link to={`/profiles/${profile_id}`} className={styles.Username}>
             <Avatar src={profile_image} height={55} />
             {owner}
           </Link>
@@ -101,8 +101,13 @@ const Post = (props) => {
         {content && <Card.Text>{content}</Card.Text>}
         {location_link && (
           <p>
-            <i className={`fas fa-map-marker-alt ${styles.locationIcon}`}></i> 
-            <a href={location_link} target="_blank" rel="noopener noreferrer">
+            <i className={`fas fa-map-marker-alt ${styles.locationIcon}`}></i>
+            <a
+              href={location_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.LocationLink}
+            >
               View on Google Maps
             </a>
           </p>
