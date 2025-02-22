@@ -58,7 +58,7 @@ h5 {
   color: #0056b3 !important;
 }
 
-/* for smaller screen sizes from 768px and down */
+/* media query for medium screen sizes from 768px and down */
 @media (max-width: 768px) {
   .Post {
     max-width: 90%;

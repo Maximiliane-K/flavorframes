@@ -1,10 +1,40 @@
 .NavBar {
     background-color: #f5f5dc;
-    border: 1px solid #ffb366;
 }
 
 .Active i {
     color: #ffb366;
 }
+
+.Logo {
+    height: 170px;
+    object-fit: contain;
+    padding-top: 20px;
+}
+
+/* media query for larger screen sizes from 992px */
+@media (max-width: 992px) {
+    .Logo {
+        height: 150px;
+        padding-top: 15px;
+    }
+}
+
+/* media query for medium screen sizes from 768px */
+@media (max-width: 768px) {
+    .Logo {
+        height: 130px;
+        padding-top: 15px;
+    }
+}
+
+/* media query for small screen sizes from 576px */
+@media (max-width: 576px) {
+    .Logo {
+        height: 120px;
+        padding-top: 15px;
+    }
+}
+
 
   

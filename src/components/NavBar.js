@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import logo from "../assets/flavorframes-logo-3.png";
+import logo from "../assets/flavorframes-logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import {
@@ -15,7 +15,7 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
-  const {expanded, setExpanded, ref} = useClickOutsideToggle();
+  const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
   const handleSignOut = async () => {
     try {
@@ -43,14 +43,7 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/feed"
       >
-        <i className="fas fa-bars"></i>Feed
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/bookmarks"
-      >
-        <i className="fas fa-bookmark"></i>Bookmarks
+        <i className="fas fa-list-ul"></i>Feed
       </NavLink>
       <NavLink
         className={styles.NavLink}
@@ -93,13 +86,13 @@ const NavBar = () => {
     <Navbar
       expanded={expanded}
       className={styles.NavBar}
-      expand="md"
+      expand="lg"
       fixed="top"
     >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
-            <img src={logo} height="150" alt="logo" />
+            <img src={logo} alt="logo" className={styles.Logo} />
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
