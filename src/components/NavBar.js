@@ -26,14 +26,25 @@ const NavBar = () => {
     }
   };
 
-  const addPostIcon = (
-    <NavLink
-      className={styles.NavLink}
-      activeClassName={styles.Active}
-      to="/posts/create"
-    >
-      <i className="far fa-plus-square"></i>Add post
-    </NavLink>
+  const addIcons = (
+    <>
+      <div>
+        <NavLink
+          className={styles.NavLink}
+          activeClassName={styles.Active}
+          to="/posts/create"
+        >
+          <i className="far fa-plus-square"></i>Add post
+        </NavLink>
+        <NavLink
+          className={styles.NavLink}
+          activeClassName={styles.Active}
+          to="/events/create"
+        >
+          <i className="fa-regular fa-calendar-plus"></i>Add event
+        </NavLink>
+      </div>
+    </>
   );
 
   const loggedInIcons = (
@@ -95,7 +106,7 @@ const NavBar = () => {
             <img src={logo} alt="logo" height={50} />
           </Navbar.Brand>
         </NavLink>
-        {currentUser && addPostIcon}
+        {currentUser && addIcons}
         <Navbar.Toggle
           ref={ref}
           onClick={() => setExpanded(!expanded)}
