@@ -17,15 +17,6 @@ h5 {
   font-size: 1.1rem;
 }
 
-/* image inside post */
-.PostImage {
-  width: 100%;
-  max-height: 750px;
-  object-fit: cover;
-  display: block;
-  border-radius: 0;
-}
-
 /* like button */
 .Heart {
   color: #f85032;
