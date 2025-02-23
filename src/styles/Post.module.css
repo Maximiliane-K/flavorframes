@@ -1,14 +1,10 @@
 .Post {
   background-color: #ffffff;
-  border: 1px solid #ffb366;
+  border: 1px solid #dadadf;
   text-align: center;
-  max-width: 600px;
-  margin: auto;
   margin-bottom: 20px !important;
-  padding: 0;
-  border-radius: 5px;
-  overflow: hidden;
 }
+
 
 .Post figure,
 h5 {
@@ -66,24 +62,4 @@ h5 {
 
 .LocationLink:hover {
   color: #0056b3 !important;
-}
-
-/* media query for medium screen sizes from 768px and down */
-@media (max-width: 768px) {
-  .Post {
-    max-width: 90%;
-    padding: 5px;
-  }
-
-  .Username {
-    font-size: 1rem;
-  }
-
-  .locationIcon {
-    font-size: 1rem;
-  }
-
-  .LocationLink {
-    font-size: 0.85rem;
-  }
 }
