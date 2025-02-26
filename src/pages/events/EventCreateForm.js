@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -7,28 +8,27 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 
-import Asset from "../../components/Asset";
 import Upload from "../../assets/upload.png";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
-import { useHistory } from "react-router";
+import Asset from "../../components/Asset";
+import { Figure } from "react-bootstrap";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
 function EventCreateForm() {
   const [errors, setErrors] = useState({});
+
   const [eventData, setEventData] = useState({
+    image: "",
     title: "",
     description: "",
-    date: "",
-    time: "",
-    location: "",
-    image: "",
+    event_date: "",
+    category: "Food event",
   });
-
-  const { title, description, date, time, location, image } = eventData;
+  const { image, title, description, event_date, category } = eventData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -54,22 +54,11 @@ function EventCreateForm() {
     event.preventDefault();
     const formData = new FormData();
 
-    // Basic validation
-    if (!title.trim() || !date.trim() || !time.trim()) {
-      setErrors({
-        title: !title.trim() ? ["Please enter the title"] : [],
-        date: !date.trim() ? ["Please select a date"] : [],
-        time: !time.trim() ? ["Please select a time"] : [],
-      });
-      return;
-    }
-
+    formData.append("image", imageInput.current.files[0]);
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("date", date);
-    formData.append("time", time);
-    formData.append("location", location);
-    formData.append("image", imageInput.current.files[0]);
+    formData.append("event_date", event_date);
+    formData.append("category", category);
 
     try {
       const { data } = await axiosReq.post("/events/", formData);
@@ -98,66 +87,63 @@ function EventCreateForm() {
           {message}
         </Alert>
       ))}
-
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
-          as="textarea"
-          rows={4}
+          type="text"
           name="description"
           value={description}
           onChange={handleChange}
         />
       </Form.Group>
-
+      {errors?.description?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       <Form.Group>
-        <Form.Label>Date</Form.Label>
+        <Form.Label>Event Date</Form.Label>
         <Form.Control
           type="date"
-          name="date"
-          value={date}
+          name="event_date"
+          value={event_date}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.date?.map((message, idx) => (
+      {errors?.event_date?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
-
       <Form.Group>
-        <Form.Label>Time</Form.Label>
+        <Form.Label>Category</Form.Label>
         <Form.Control
-          type="time"
-          name="time"
-          value={time}
+          as="select"
+          name="category"
+          value={category}
           onChange={handleChange}
-        />
+        >
+          <option value="Food event">Food event</option>
+          <option value="Drinks event">Drinks event</option>
+          <option value="Sommerfestival">Sommerfestival</option>
+          <option value="Winterfestival">Winterfestival</option>
+          <option value="Exhibition">Exhibition</option>
+          <option value="Other">Other</option>
+        </Form.Control>
       </Form.Group>
-      {errors?.time?.map((message, idx) => (
+      {errors?.category?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
-
-      <Form.Group>
-        <Form.Label>Location</Form.Label>
-        <Form.Control
-          type="text"
-          name="location"
-          value={location}
-          onChange={handleChange}
-        />
-      </Form.Group>
-
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
       >
-        Cancel
+        cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        Create Event
+        create
       </Button>
     </div>
   );
@@ -172,9 +158,9 @@ function EventCreateForm() {
             <Form.Group className="text-center">
               {image ? (
                 <>
-                  <figure>
+                  <Figure>
                     <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
+                  </Figure>
                   <div>
                     <Form.Label
                       className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
@@ -189,10 +175,7 @@ function EventCreateForm() {
                   className="d-flex justify-content-center"
                   htmlFor="image-upload"
                 >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload an image"
-                  />
+                  <Asset src={Upload} message="Click or tap to upload image" />
                 </Form.Label>
               )}
 
@@ -208,7 +191,6 @@ function EventCreateForm() {
                 {message}
               </Alert>
             ))}
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
