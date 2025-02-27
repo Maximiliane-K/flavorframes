@@ -17,6 +17,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import EventCreateForm from "./pages/events/EventCreateForm";
 import EventPage from "./pages/events/EventPage";
 import EventEditForm from "./pages/events/EventEditForm";
+import EventsPage from "./pages/events/EventsPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -32,6 +33,13 @@ function App() {
             path="/"
             render={() => (
               <PostsPage message="No results found. Adjust the search keyword." />
+            )}
+          />
+          <Route
+            exact
+            path="/events"
+            render={() => (
+              <EventsPage message="No events found. Adjust the search keyword." />
             )}
           />
           <Route
@@ -57,11 +65,19 @@ function App() {
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
-          <Route exact path="/events/create" render={() => <EventCreateForm />} />
+          <Route
+            exact
+            path="/events/create"
+            render={() => <EventCreateForm />}
+          />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/events/:id" render={() => <EventPage />} />
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
-          <Route exact path="/events/:id/edit" render={() => <EventEditForm />} />
+          <Route
+            exact
+            path="/events/:id/edit"
+            render={() => <EventEditForm />}
+          />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route
             exact

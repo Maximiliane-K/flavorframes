@@ -58,19 +58,25 @@ const Event = (props) => {
             )}
           </div>
         </Media>
+
+        {title && <h5 className={styles.EventTitle}>{title}</h5>}
+
+        <div className={styles.EventMeta}>
+          <span className={styles.EventIcon}>
+            <i className="fas fa-calendar-alt"></i> {event_date}
+          </span>
+          <span className={styles.EventIcon}>
+            <i className="fas fa-layer-group"></i> {category}
+          </span>
+        </div>
       </Card.Body>
+
       <Link to={`/events/${id}`}>
         <Card.Img src={image} alt={title} />
       </Link>
+
       <Card.Body>
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
         {description && <Card.Text>{description}</Card.Text>}
-        <p>
-          <strong>Category:</strong> {category}
-        </p>
-        <p>
-          <strong>Event Date:</strong> {event_date}
-        </p>
       </Card.Body>
     </Card>
   );
