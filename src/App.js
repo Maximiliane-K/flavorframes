@@ -44,6 +44,17 @@ function App() {
           />
           <Route
             exact
+            path="/my-events"
+            render={() => (
+              <EventsPage
+                message="No events found. Try attending an event!"
+                filter="attending=true&"
+              />
+            )}
+          />
+
+          <Route
+            exact
             path="/feed"
             render={() => (
               <PostsPage

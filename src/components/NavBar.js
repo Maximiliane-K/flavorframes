@@ -49,13 +49,24 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/feed"
-      >
-        <i className="fas fa-list-ul"></i> Feed
-      </NavLink>
+      <Dropdown>
+        <Dropdown.Toggle
+          className={`${styles.NavLink} ${styles.NoButton}`}
+          as="div"
+        >
+          <i className="fas fa-list-ul"></i> Feed
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item as={Link} to="/feed">
+            Posts
+          </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/my-events">
+            Events I'm attending
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -63,9 +74,11 @@ const NavBar = () => {
       >
         <i className="fas fa-heart"></i> Liked
       </NavLink>
+
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i> Sign out
       </NavLink>
+
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}

@@ -26,7 +26,9 @@ function EventsPage({ message, filter = "" }) {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data } = await axiosReq.get(`/events/?${filter}search=${query}`);
+        const { data } = await axiosReq.get(
+          `/events/?${filter}${query ? `search=${query}` : ""}`
+        );
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {
