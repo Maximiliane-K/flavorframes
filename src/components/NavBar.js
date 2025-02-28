@@ -1,8 +1,8 @@
 import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
 import logo from "../assets/flavorframes-logo.png";
 import styles from "../styles/NavBar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   useCurrentUser,
   useSetCurrentUser,
@@ -34,14 +34,14 @@ const NavBar = () => {
           activeClassName={styles.Active}
           to="/posts/create"
         >
-          <i className="far fa-plus-square"></i>Add post
+          <i className="far fa-plus-square"></i> Add post
         </NavLink>
         <NavLink
           className={styles.NavLink}
           activeClassName={styles.Active}
           to="/events/create"
         >
-          <i className="fa-regular fa-calendar-plus"></i>Add event
+          <i className="fa-regular fa-calendar-plus"></i> Add event
         </NavLink>
       </div>
     </>
@@ -54,17 +54,17 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/feed"
       >
-        <i className="fas fa-list-ul"></i>Feed
+        <i className="fas fa-list-ul"></i> Feed
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/liked"
       >
-        <i className="fas fa-heart"></i>Liked
+        <i className="fas fa-heart"></i> Liked
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
-        <i className="fas fa-sign-out-alt"></i>Sing out
+        <i className="fas fa-sign-out-alt"></i> Sign out
       </NavLink>
       <NavLink
         className={styles.NavLink}
@@ -74,6 +74,7 @@ const NavBar = () => {
       </NavLink>
     </>
   );
+
   const loggedOutIcons = (
     <>
       <NavLink
@@ -81,14 +82,14 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/signin"
       >
-        <i className="fas fa-sign-in-alt"></i>Sign in
+        <i className="fas fa-sign-in-alt"></i> Sign in
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/signup"
       >
-        <i className="fas fa-user-plus"></i>Sign up
+        <i className="fas fa-user-plus"></i> Sign up
       </NavLink>
     </>
   );
@@ -114,14 +115,24 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/"
-            >
-              <i className="fas fa-home"></i>Home
-            </NavLink>
+            <Dropdown>
+              <Dropdown.Toggle
+                className={`${styles.NavLink} ${styles.NoButton}`}
+                as="div"
+              >
+                <i className="fas fa-compass"></i> Discover
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="/">
+                  Posts
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/events">
+                  Events
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
