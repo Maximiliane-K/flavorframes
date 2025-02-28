@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/Event.module.css";
+import btnStyles from "../../styles/Button.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
@@ -21,11 +22,20 @@ const Event = (props) => {
     updated_at,
     eventPage,
     setEvents,
+    initialStatus,
+    initialAttendingCount = 0,
+    initialInterestedCount = 0,
   } = props;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+
+  const [status, setStatus] = useState(initialStatus);
+  const [attendingCount, setAttendingCount] = useState(initialAttendingCount);
+  const [interestedCount, setInterestedCount] = useState(
+    initialInterestedCount
+  );
 
   const handleEdit = () => {
     history.push(`/events/${id}/edit`);
@@ -35,6 +45,27 @@ const Event = (props) => {
     try {
       await axiosRes.delete(`/events/${id}/`);
       history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleAttendance = async (newStatus) => {
+    try {
+      if (status === newStatus) {
+        const { data } = await axiosRes.delete(`/attendance/${id}/`);
+        setStatus(null);
+        setAttendingCount(data.attending_count);
+        setInterestedCount(data.interested_count);
+      } else {
+        const { data } = await axiosRes.post(`/attendance/`, {
+          event: id,
+          status: newStatus,
+        });
+        setStatus(data.status);
+        setAttendingCount(data.attending_count);
+        setInterestedCount(data.interested_count);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -58,14 +89,15 @@ const Event = (props) => {
             )}
           </div>
         </Media>
+      </Card.Body>
 
-        {title && <h5 className={styles.EventTitle}>{title}</h5>}
-
-        <div className={styles.EventMeta}>
-          <span className={styles.EventIcon}>
+      <Card.Body>
+        <h5 className="text-center">{title}</h5>
+        <div>
+          <span>
             <i className="fas fa-calendar-alt"></i> {event_date}
           </span>
-          <span className={styles.EventIcon}>
+          <span>
             <i className="fas fa-layer-group"></i> {category}
           </span>
         </div>
@@ -77,6 +109,27 @@ const Event = (props) => {
 
       <Card.Body>
         {description && <Card.Text>{description}</Card.Text>}
+        <div>
+          <button
+            className={`${btnStyles.Button} ${
+              status === "attending" ? btnStyles.Active : ""
+            }`}
+            onClick={() => handleAttendance("attending")}
+          >
+            <i className={`fas fa-check-circle`}></i>
+            Attend ({attendingCount || 0})
+          </button>
+
+          <button
+            className={`${btnStyles.Button} ${
+              status === "interested" ? btnStyles.Active : ""
+            }`}
+            onClick={() => handleAttendance("interested")}
+          >
+            <i className={`fas fa-star`}></i>
+            Interested ({interestedCount || 0})
+          </button>
+        </div>
       </Card.Body>
     </Card>
   );
