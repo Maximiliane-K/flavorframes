@@ -33,7 +33,9 @@ const Event = (props) => {
 
   const [status, setStatus] = useState(initialStatus);
   const [attendingCount, setAttendingCount] = useState(initialAttendingCount);
-  const [interestedCount, setInterestedCount] = useState(initialInterestedCount);
+  const [interestedCount, setInterestedCount] = useState(
+    initialInterestedCount
+  );
   const [attendingUsers, setAttendingUsers] = useState([]);
   const [interestedUsers, setInterestedUsers] = useState([]);
 
@@ -65,50 +67,41 @@ const Event = (props) => {
     }
   };
 
-  const handleAttendance = async (newStatus) => {
+  const handleAttendance = async () => {
     try {
       let response;
       let updatedAttendingUsers = [...attendingUsers];
-      let updatedInterestedUsers = [...interestedUsers];
-  
-      if (status === newStatus) {
+
+      if (status === "attending") {
         response = await axiosRes.delete(`/attendance/${id}/`);
         setStatus(null);
-  
-        if (newStatus === "attending") {
-          updatedAttendingUsers = updatedAttendingUsers.filter((user) => user.user !== currentUser.username);
-        } else {
-          updatedInterestedUsers = updatedInterestedUsers.filter((user) => user.user !== currentUser.username);
-        }
-  
+        updatedAttendingUsers = updatedAttendingUsers.filter(
+          (user) => user.user !== currentUser.username
+        );
       } else {
-        response = await axiosRes.post(`/attendance/`, { event: id, status: newStatus });
-        setStatus(newStatus);
-  
-        const newUser = { user: currentUser.username, profile_image: currentUser.profile_image };
-  
-        if (newStatus === "attending") {
-          updatedAttendingUsers = [...updatedAttendingUsers, newUser];
-          updatedInterestedUsers = updatedInterestedUsers.filter((user) => user.user !== currentUser.username);
-        } else {
-          updatedInterestedUsers = [...updatedInterestedUsers, newUser];
-          updatedAttendingUsers = updatedAttendingUsers.filter((user) => user.user !== currentUser.username);
-        }
+        response = await axiosRes.post(`/attendance/`, {
+          event: id,
+          status: "attending",
+        });
+        setStatus("attending");
+
+        const newUser = {
+          user: currentUser.username,
+          profile_image: currentUser.profile_image,
+        };
+        updatedAttendingUsers = [...updatedAttendingUsers, newUser];
       }
-  
+
       if (response && response.data) {
         setAttendingUsers(updatedAttendingUsers);
-        setInterestedUsers(updatedInterestedUsers);
-        setAttendingCount(response.data.attending_count || 0);
-        setInterestedCount(response.data.interested_count || 0);
+        setAttendingCount(
+          response.data.attending_count || updatedAttendingUsers.length
+        );
       }
-  
     } catch (err) {
       console.error("Error in handleAttendance:", err);
     }
   };
-  
-  
 
   return (
     <Card className={styles.Event}>
@@ -121,7 +114,10 @@ const Event = (props) => {
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
             {is_owner && eventPage && (
-              <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
             )}
           </div>
         </Media>
@@ -147,17 +143,22 @@ const Event = (props) => {
         {description && <Card.Text>{description}</Card.Text>}
         <div>
           <button
-            className={`${btnStyles.Button} ${status === "attending" ? btnStyles.Active : ""}`}
-            onClick={() => handleAttendance("attending")}
+            className={`${btnStyles.Button} ${
+              status === "attending" ? btnStyles.Active : ""
+            }`}
+            onClick={handleAttendance}
           >
-            <i className={`fas fa-check-circle`}></i> Attend ({attendingCount || 0})
-          </button>
-
-          <button
-            className={`${btnStyles.Button} ${status === "interested" ? btnStyles.Active : ""}`}
-            onClick={() => handleAttendance("interested")}
-          >
-            <i className={`fas fa-star`}></i> Interested ({interestedCount || 0})
+            {status === "attending" ? (
+              <>
+                <i className="fas fa-check-circle"></i> Attending (
+                {attendingCount || 0})
+              </>
+            ) : (
+              <>
+                <i className="fas fa-plus-circle"></i> Attend (
+                {attendingCount || 0})
+              </>
+            )}
           </button>
         </div>
       </Card.Body>
@@ -166,22 +167,13 @@ const Event = (props) => {
         <h6>Attending:</h6>
         <div className={styles.UserList}>
           {attendingUsers.length > 0 ? (
-            attendingUsers.slice(0, 3).map((user) => (
-              <Avatar key={user.id} src={user.profile_image} height={40} />
-            ))
+            attendingUsers
+              .slice(0, 3)
+              .map((user) => (
+                <Avatar key={user.id} src={user.profile_image} height={40} />
+              ))
           ) : (
             <p>No one attending yet</p>
-          )}
-        </div>
-
-        <h6>Interested:</h6>
-        <div className={styles.UserList}>
-          {interestedUsers.length > 0 ? (
-            interestedUsers.slice(0, 3).map((user) => (
-              <Avatar key={user.id} src={user.profile_image} height={40} />
-            ))
-          ) : (
-            <p>No one interested yet</p>
           )}
         </div>
       </Card.Body>
