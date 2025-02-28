@@ -29,7 +29,16 @@ function EventsPage({ message, filter = "" }) {
         const { data } = await axiosReq.get(
           `/events/?${filter}${query ? `search=${query}` : ""}`
         );
-        setEvents(data);
+
+        // Ensure status is correctly stored
+        setEvents((prevEvents) => ({
+          ...prevEvents,
+          results: data.results.map((event) => ({
+            ...event,
+            status: event.user_status, // Store user status from API
+          })),
+        }));
+
         setHasLoaded(true);
       } catch (err) {
         console.log(err);

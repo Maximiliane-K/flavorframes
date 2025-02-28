@@ -33,9 +33,7 @@ const Event = (props) => {
 
   const [status, setStatus] = useState(initialStatus);
   const [attendingCount, setAttendingCount] = useState(initialAttendingCount);
-  const [interestedCount, setInterestedCount] = useState(
-    initialInterestedCount
-  );
+  const [interestedCount, setInterestedCount] = useState(initialInterestedCount);
   const [attendingUsers, setAttendingUsers] = useState([]);
   const [interestedUsers, setInterestedUsers] = useState([]);
 
@@ -47,12 +45,16 @@ const Event = (props) => {
         setInterestedUsers(data.interested);
         setAttendingCount(data.attending_count);
         setInterestedCount(data.interested_count);
+
+        const userAttendance = data.attending.find(user => user.user === currentUser?.username);
+        setStatus(userAttendance ? "attending" : null);
+
       } catch (err) {
         console.log(err);
       }
     };
     fetchAttendance();
-  }, [id]);
+  }, [id, currentUser]);
 
   const handleEdit = () => {
     history.push(`/events/${id}/edit`);
@@ -73,30 +75,22 @@ const Event = (props) => {
       let updatedAttendingUsers = [...attendingUsers];
 
       if (status === "attending") {
-        response = await axiosRes.delete(`/attendance/${id}/`);
         setStatus(null);
-        updatedAttendingUsers = updatedAttendingUsers.filter(
-          (user) => user.user !== currentUser.username
-        );
-      } else {
-        response = await axiosRes.post(`/attendance/`, {
-          event: id,
-          status: "attending",
-        });
-        setStatus("attending");
+        setAttendingUsers(updatedAttendingUsers.filter(user => user.user !== currentUser.username));
+        setAttendingCount(prevCount => Math.max(prevCount - 1, 0));
 
-        const newUser = {
-          user: currentUser.username,
-          profile_image: currentUser.profile_image,
-        };
-        updatedAttendingUsers = [...updatedAttendingUsers, newUser];
+        response = await axiosRes.delete(`/attendance/${id}/`);
+      } else {
+        setStatus("attending");
+        const newUser = { user: currentUser.username, profile_image: currentUser.profile_image };
+        setAttendingUsers([...updatedAttendingUsers, newUser]);
+        setAttendingCount(prevCount => prevCount + 1);
+
+        response = await axiosRes.post(`/attendance/`, { event: id, status: "attending" });
       }
 
       if (response && response.data) {
-        setAttendingUsers(updatedAttendingUsers);
-        setAttendingCount(
-          response.data.attending_count || updatedAttendingUsers.length
-        );
+        setAttendingCount(response.data.attending_count);
       }
     } catch (err) {
       console.error("Error in handleAttendance:", err);
@@ -114,10 +108,7 @@ const Event = (props) => {
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
             {is_owner && eventPage && (
-              <MoreDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-              />
+              <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />
             )}
           </div>
         </Media>
@@ -143,20 +134,16 @@ const Event = (props) => {
         {description && <Card.Text>{description}</Card.Text>}
         <div>
           <button
-            className={`${btnStyles.Button} ${
-              status === "attending" ? btnStyles.Active : ""
-            }`}
+            className={`${btnStyles.Button} ${status === "attending" ? btnStyles.Active : ""}`}
             onClick={handleAttendance}
           >
             {status === "attending" ? (
               <>
-                <i className="fas fa-check-circle"></i> Attending (
-                {attendingCount || 0})
+                <i className="fas fa-check-circle"></i> Attending ({attendingCount || 0})
               </>
             ) : (
               <>
-                <i className="fas fa-plus-circle"></i> Attend (
-                {attendingCount || 0})
+                <i className="fas fa-plus-circle"></i> Attend ({attendingCount || 0})
               </>
             )}
           </button>
@@ -167,11 +154,9 @@ const Event = (props) => {
         <h6>Attending:</h6>
         <div className={styles.UserList}>
           {attendingUsers.length > 0 ? (
-            attendingUsers
-              .slice(0, 3)
-              .map((user) => (
-                <Avatar key={user.id} src={user.profile_image} height={40} />
-              ))
+            attendingUsers.slice(0, 3).map((user) => (
+              <Avatar key={user.id} src={user.profile_image} height={40} />
+            ))
           ) : (
             <p>No one attending yet</p>
           )}
