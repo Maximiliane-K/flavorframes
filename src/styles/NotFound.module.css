@@ -1,0 +1,30 @@
+.NotFound {
+    max-height: 10vh;
+}
+
+.NotFoundPage {
+    background-color: white !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.NotFoundLink {
+    display: inline-block;
+    color: blue;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+}
+
+.NotFoundLink:hover {
+    color: #ffb366 !important;
+    text-decoration: underline;
+}
+
+img {
+    max-height: 80vh;
+}

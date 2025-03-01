@@ -18,6 +18,8 @@ import EventCreateForm from "./pages/events/EventCreateForm";
 import EventPage from "./pages/events/EventPage";
 import EventEditForm from "./pages/events/EventEditForm";
 import EventsPage from "./pages/events/EventsPage";
+import NotFound from "./components/NotFound";
+
 
 function App() {
   const currentUser = useCurrentUser();
@@ -106,7 +108,7 @@ function App() {
             render={() => <ProfileEditForm />}
           />
 
-          <Route render={() => <p>Page not found!</p>} />
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
     </div>
