@@ -21,13 +21,17 @@ import {
 import { Button, Image } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
+import Event from "../events/Event";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePosts, setProfilePosts] = useState({ results: [] });
+  const [profileEvents, setProfileEvents] = useState({ results: [] });
 
   const currentUser = useCurrentUser();
   const { id } = useParams();
@@ -44,28 +48,29 @@ function ProfilePage() {
         const [{ data: pageProfile }] = await Promise.all([
           axiosReq.get(`/profiles/${id}/`),
         ]);
-
+  
+        const { data: profilePosts } = await axiosReq.get(
+          `/posts/?owner__username=${pageProfile.owner}`
+        );
+  
+        const { data: profileEvents } = await axiosReq.get(`/events/?owner__profile=${id}`);  
+  
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
         }));
-
-        if (pageProfile?.owner) {
-          const { data: profilePosts } = await axiosReq.get(
-            `/posts/?owner__username=${pageProfile.owner}` 
-          );
-          setProfilePosts(profilePosts);
-        }
-
+        setProfilePosts(profilePosts);
+        setProfileEvents(profileEvents);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
+  
     fetchData();
-}, [id, setProfileData]);
-
-
+  }, [id, setProfileData]);
+  
+  
   const mainProfile = (
     <>
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
@@ -84,7 +89,7 @@ function ProfilePage() {
         {currentUser && !is_owner && (
           <Button
             className={`${btnStyles.Button} ${
-              profile?.following_id ? btnStyles.BlackOutline : btnStyles.Black
+              profile?.following_id ? btnStyles.Unfollow : btnStyles.Follow
             } mt-2`}
             onClick={() =>
               profile?.following_id
@@ -98,7 +103,10 @@ function ProfilePage() {
 
         {profile?.city && (
           <p className="d-flex align-items-center text-muted mt-3">
-            <i className="fa-solid fa-location-dot me-2"></i> {profile.city}
+            <i
+              className={`fa-solid fa-location-dot me-2 ${styles.ProfileCity}`}
+            ></i>{" "}
+            {profile.city}
           </p>
         )}
 
@@ -106,6 +114,10 @@ function ProfilePage() {
           <Col xs={3} className="text-center">
             <strong>{profile?.posts_count}</strong>
             <div>posts</div>
+          </Col>
+          <Col xs={3} className="text-center">
+            <strong>{profile?.events_count}</strong>
+            <div>events</div>
           </Col>
           <Col xs={3} className="text-center">
             <strong>{profile?.followers_count}</strong>
@@ -128,9 +140,6 @@ function ProfilePage() {
 
   const mainProfilePosts = (
     <>
-      <hr />
-      <p className="text-center">{profile?.owner}'s posts</p>
-      <hr />
       {profilePosts.results.length ? (
         <InfiniteScroll
           children={profilePosts.results.map((post) => (
@@ -150,15 +159,43 @@ function ProfilePage() {
     </>
   );
 
+  const mainProfileEvents = (
+    <>
+      {profileEvents.results.length ? (
+        <InfiniteScroll
+          children={profileEvents.results.map((event) => (
+            <Event key={event.id} {...event} setEvents={setProfileEvents} />
+          ))}
+          dataLength={profileEvents.results.length}
+          loader={<Asset spinner />}
+          hasMore={!!profileEvents.next}
+          next={() => fetchMoreData(profileEvents, setProfileEvents)}
+        />
+      ) : (
+        <Asset
+          src={NoResults}
+          message={`No events found, ${profile?.owner} hasn't created any events yet.`}
+        />
+      )}
+    </>
+  );
+
   return (
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
-        <Container className={appStyles.Content}>
+        <Container className={styles.ProfileTabs}>
           {hasLoaded ? (
             <>
               {mainProfile}
-              {mainProfilePosts}
+              <Tabs defaultActiveKey="posts" id="profile-tab">
+                <Tab eventKey="posts" title={`${profile?.owner}'s posts`}>
+                  {mainProfilePosts}
+                </Tab>
+                <Tab eventKey="events" title={`${profile?.owner}'s events`}>
+                  {mainProfileEvents}
+                </Tab>
+              </Tabs>
             </>
           ) : (
             <Asset spinner />
