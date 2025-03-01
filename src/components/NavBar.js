@@ -28,7 +28,7 @@ const NavBar = () => {
       setExpanded(false);
       removeTokenTimestamp();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

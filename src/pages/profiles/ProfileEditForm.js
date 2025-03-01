@@ -49,7 +49,7 @@ const ProfileEditForm = () => {
             });
           }
         } catch (err) {
-          console.log(err);
+          //console.log(err);
           if (isMounted) {
             history.push("/");
           }
@@ -93,7 +93,7 @@ const ProfileEditForm = () => {
   
       window.location.reload();
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       setErrors(err.response?.data);
     }
   };

@@ -19,7 +19,7 @@ function EventPage() {
         const { data: event } = await axiosReq.get(`/events/${id}`);
         setEvent({ results: [event] });
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     };
 

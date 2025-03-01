@@ -41,7 +41,7 @@ function EventsPage({ message, filter = "" }) {
 
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     };
 
