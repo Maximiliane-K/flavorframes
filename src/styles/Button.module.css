@@ -1,9 +1,9 @@
 .Button {
-    font-size: 0.8rem;
+    font-size: .8rem;
     align-self: center;
     border-radius: 100px;
     border-color: transparent;
-    padding: 4px 10px;
+    padding: 2px 5px;
     margin-left: 2px;
     margin-right: 2px;
     min-width: 75px;
@@ -32,38 +32,26 @@
     width: 100%;
   }
   
-  .Blue,
-  .BlueOutline:hover,
-  .Bright:hover {
-    background-color: #2142b2;
-    color: #ffffff;
-  }
-  
-  .BlueOutline,
-  .Blue:hover {
-    /* border: 1px solid #2142b2; */
-    background-color: #ffffff;
-    color: #2142b2;
-  }
-  
-  .Black,
-  .BlackOutline:hover {
-    /* background-color: #242a3d;
-    color: white; */
-    background-color: #242a3d;
-    color: #ffffff;
-  }
-  
-  .Black:hover,
-  .BlackOutline {
-    /* background-color: #dadadf;
-    color: #242a3d;
-    border-color: #242a3d; */
+  .Follow {
+    color: #2d2d2d;
     background-color: #ffb366;
+  }
+
+  .Follow:hover,
+  .Unfollow:hover {
     color: #2d2d2d;
+    background-color: #f5f5dc;
+  }
+
+  .Unfollow {
+    color: #2d2d2d;
+    background-color: #969696;
+  }
+
+  .Active {
+    background-color: #b6e8ab !important;
+    color: #2d2d2d !important;
+    border: 2px solid #218838;
+    transition: background-color 0.3s ease;
   }
   
-  .Bright {
-    background-color: #ffb266;
-    color: #2d2d2d;
-  }

@@ -35,17 +35,17 @@
 }
   
 a {
-  color: #969696;
+  color: #2d2d2d;
   transition: color ease-in-out 0.3s;
 }
   
 a:hover {
-  color: #ffb366; 
+  color: #f5f5dc !important; 
   text-decoration: none;
 }
   
 a:hover i {
-  color: #ffb366;
+  color: #f5f5dc !important;
   transition: color ease-in-out 0.3s;
 }
 
@@ -54,7 +54,7 @@ input[type="file"] {
 }
   
 i {
-  color: #969696;
+  color: #2d2d2d;
   font-size: 1.1rem;
   padding: 10px;
   vertical-align: middle;
@@ -83,4 +83,11 @@ figure {
 }
 *::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+
+@media (max-width: 990px) { 
+  .MostFollowedText {
+    display: none;
+  }
 }

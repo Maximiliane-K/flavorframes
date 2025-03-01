@@ -3,25 +3,4 @@
     text-align: center;
     margin-bottom: 20px !important;
   }
-
-  .EventMeta {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 10px 0;
-  }
-
-  .EventIcon {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #6c757d;
-  }
-  
-  .EventIcon i {
-    font-size: 1.3rem;
-    color: #ffb366;
-  }
   

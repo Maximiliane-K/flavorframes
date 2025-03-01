@@ -1,7 +1,27 @@
 .NavBar {
-    background-color: #f5f5dc;
+    background-color: #ffb366;
 }
 
-.Active i {
-    color: #ffb366;
+.Active, .Active i {
+    color: #f5f5dc !important;
+}
+
+
+.NoButton, .NoButton i {
+    color: #2d2d2d;
+    transition: color ease-in-out 0.3s;
+}
+
+.NoButton:hover, 
+.NoButton:hover i {
+    color: #f5f5dc !important;
+}
+
+.NoButton .dropdown-menu .dropdown-item:hover {
+    background-color: #ffb366 !important; 
+    color: #ffffff !important;
+}
+
+.DropdownItem:hover {
+    background-color: #ffb366 !important;
 }
