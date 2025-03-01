@@ -9,11 +9,12 @@ import {
 } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import axios from "axios";
+import { removeTokenTimestamp } from "../utils/utils";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-  
+
   const [expanded, setExpanded] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
 
@@ -22,6 +23,7 @@ const NavBar = () => {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       setExpanded(false);
+      removeTokenTimestamp();
     } catch (err) {
       console.log(err);
     }
@@ -62,21 +64,24 @@ const NavBar = () => {
         onToggle={() => handleDropdownToggle("feed")}
         show={dropdownOpen === "feed"}
       >
-        <Dropdown.Toggle className={`${styles.NavLink} ${styles.NoButton}`} as="div">
+        <Dropdown.Toggle
+          className={`${styles.NavLink} ${styles.NoButton}`}
+          as="div"
+        >
           <i className="fas fa-list-ul"></i> Feed
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item 
-            as={Link} 
-            to="/feed" 
+          <Dropdown.Item
+            as={Link}
+            to="/feed"
             className={styles.DropdownItem}
             onClick={closeNavbar}
           >
             Posts
           </Dropdown.Item>
-          <Dropdown.Item 
-            as={Link} 
-            to="/my-events" 
+          <Dropdown.Item
+            as={Link}
+            to="/my-events"
             className={styles.DropdownItem}
             onClick={closeNavbar}
           >
@@ -130,7 +135,12 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar expanded={expanded} className={styles.NavBar} expand="lg" fixed="top">
+    <Navbar
+      expanded={expanded}
+      className={styles.NavBar}
+      expand="lg"
+      fixed="top"
+    >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -138,27 +148,33 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addIcons}
-        <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
             <Dropdown
               onToggle={() => handleDropdownToggle("discover")}
               show={dropdownOpen === "discover"}
             >
-              <Dropdown.Toggle className={`${styles.NavLink} ${styles.NoButton}`} as="div">
+              <Dropdown.Toggle
+                className={`${styles.NavLink} ${styles.NoButton}`}
+                as="div"
+              >
                 <i className="fas fa-compass"></i> Discover
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item 
-                  as={Link} 
-                  to="/" 
+                <Dropdown.Item
+                  as={Link}
+                  to="/"
                   className={styles.DropdownItem}
                   onClick={closeNavbar}
                 >
                   Posts
                 </Dropdown.Item>
-                <Dropdown.Item 
-                  as={Link} 
+                <Dropdown.Item
+                  as={Link}
                   to="/events"
                   className={styles.DropdownItem}
                   onClick={closeNavbar}
