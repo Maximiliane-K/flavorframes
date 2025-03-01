@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Dropdown from "react-bootstrap/Dropdown";
 import logo from "../assets/flavorframes-logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink, Link } from "react-router-dom";
