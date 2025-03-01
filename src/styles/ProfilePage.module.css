@@ -16,9 +16,8 @@
   border: 1px solid #dadadf;
 }
 
-a:hover {
-  color: #ffb366 !important; 
-  text-decoration: none;
+.ProfileTabs a:hover {
+  color: #ffb366 !important;
 }
 
 @media screen and (max-width: 991px) {

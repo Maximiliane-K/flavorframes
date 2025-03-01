@@ -19,7 +19,7 @@ h5 {
 
 /* like button */
 .Heart {
-  color: #f85032;
+  color: #f85032 !important;
 }
 
 .Heart:hover {

@@ -90,7 +90,8 @@ function EventCreateForm() {
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
-          type="text"
+          as="textarea"
+          rows={6}
           name="description"
           value={description}
           onChange={handleChange}
@@ -137,12 +138,12 @@ function EventCreateForm() {
         </Alert>
       ))}
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.CancelCreate}`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.CancelCreate}`} type="submit">
         create
       </Button>
     </div>

@@ -1,57 +1,74 @@
 .Button {
-    font-size: .8rem;
-    align-self: center;
-    border-radius: 100px;
-    border-color: transparent;
-    padding: 2px 5px;
-    margin-left: 2px;
-    margin-right: 2px;
-    min-width: 75px;
-  }
-  
-  .Button:hover {
-    opacity: 0.8;
-    border-color: transparent;
-    cursor: pointer;
-  }
-  
-  .Button:hover:active {
-    background-color: #ffb366 !important;
-  }
-  
-  .Button:active {
-    background-color: #ffb366 !important;
-  }
-  
-  .Button:focus {
-    background-color: #ffb366;
-  }
-  
-  .Wide {
-    padding: 10px 50px;
-    width: 100%;
-  }
-  
-  .Follow {
-    color: #2d2d2d;
-    background-color: #ffb366;
-  }
+  font-size: .9rem;
+  align-self: center;
+  border-radius: 100px;
+  border-color: transparent;
+  padding: 2px 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  min-width: 75px;
+}
 
-  .Follow:hover,
-  .Unfollow:hover {
-    color: #2d2d2d;
-    background-color: #f5f5dc;
-  }
+.Button:hover {
+  opacity: 0.8;
+  border-color: transparent;
+  cursor: pointer;
+}
 
-  .Unfollow {
-    color: #2d2d2d;
-    background-color: #969696;
-  }
+.Button:hover:active {
+  background-color: #f5f5dc !important;
+}
 
-  .Active {
-    background-color: #b6e8ab !important;
-    color: #2d2d2d !important;
-    border: 2px solid #218838;
-    transition: background-color 0.3s ease;
-  }
+.Button:active {
+  background-color: #ffb366 !important;
+}
+
+.Button:focus {
+  background-color: #ffb366;
+}
+
+.Wide {
+  padding: 10px 50px;
+  width: 100%;
+}
+
+/* styling for buttons in Add post/event */
+.CancelCreate {
+  color: #f5f5dc;
+  background-color: #969696;
+}
+
+.CancelCreate:hover {
+  color: #2d2d2d;
+  background-color: #f5f5dc;
+}
+
+.CancelCreate:active {
+  color: #2d2d2d;
   
+}
+
+/* styling for follow/unfollow buttons */
+.Follow {
+  color: #2d2d2d;
+  background-color: #ffb366;
+}
+
+.Follow:hover,
+.Unfollow:hover {
+  color: #2d2d2d;
+  background-color: #f5f5dc;
+}
+
+.Unfollow {
+  color: #f5f5dc;
+  background-color: #969696;
+}
+
+/* styling for attend button in event */
+.Active {
+  background-color: #b6e8ab !important;
+  color: #2d2d2d !important;
+  border: 2px solid #218838;
+  transition: background-color 0.3s ease;
+}
