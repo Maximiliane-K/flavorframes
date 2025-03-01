@@ -21,10 +21,8 @@ const Event = (props) => {
     image,
     updated_at,
     eventPage,
-    setEvents,
     initialStatus,
     initialAttendingCount = 0,
-    initialInterestedCount = 0,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -33,18 +31,14 @@ const Event = (props) => {
 
   const [status, setStatus] = useState(initialStatus);
   const [attendingCount, setAttendingCount] = useState(initialAttendingCount);
-  const [interestedCount, setInterestedCount] = useState(initialInterestedCount);
   const [attendingUsers, setAttendingUsers] = useState([]);
-  const [interestedUsers, setInterestedUsers] = useState([]);
 
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
         const { data } = await axiosRes.get(`/attendance/?event=${id}`);
         setAttendingUsers(data.attending);
-        setInterestedUsers(data.interested);
         setAttendingCount(data.attending_count);
-        setInterestedCount(data.interested_count);
 
         const userAttendance = data.attending.find(user => user.user === currentUser?.username);
         setStatus(userAttendance ? "attending" : null);
