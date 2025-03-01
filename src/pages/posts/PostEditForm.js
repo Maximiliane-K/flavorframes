@@ -78,7 +78,7 @@ function PostEditForm() {
     }
 
     formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
+    formData.append("location_link", location_link);
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
