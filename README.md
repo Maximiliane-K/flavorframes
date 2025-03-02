@@ -654,38 +654,51 @@ Please click [here](https://github.com/Maximiliane-K/flavorframes/blob/main/TEST
 
 ### Deployment
 
-Once you have created a new gitpod workspace and set up the new project, you are ready to deploy to Heroku.
+**Deployment**  
 
-1.  In your heroku account, select Create New App, and give it a unique name related to your project.
-2.  Select a region corresponding to where you live and click 'Create App'.
-3.  Head into the 'Deploy' tab select GitHub as the 'deployment method', find your project repository and click 'Connect'.
-4.  Click 'Deploy branch' to trigger Heroku to start building the application.
-5.  Once you see the message saying 'build succeeded' you can click 'Open App' to see your application in the browser.
+Once you've set up a new Gitpod workspace and initialized the project, you're ready to deploy it on Heroku.
 
-### Connect React Frontend to the API backend
+- Log into your Heroku account and click on 'Create New App'. Choose a unique name that relates to your project.
+- Pick a region that best matches your location and hit 'Create App'.
+- Navigate to the 'Deploy' section, select GitHub as your deployment method, find your repository, and click 'Connect'.
+- Click 'Deploy Branch' to initiate the build process on Heroku.
+- Once the build completes successfully and you see the 'build succeeded' message, click 'Open App' to view your live application in the browser.
+- Connecting a React Frontend to the API Backend
+- After deploying your API to Heroku, the next step is linking your React frontend to the backend so it can send and receive data.
 
-Once you have set up the workspace and done a basic deploy to Heroku, you can connect the react workspace to your API, in order to send data to the API
+In the Heroku dashboard, open your API application's settings.  
 
-1.  In the Heroku dashboard, go into the API application settings
-2.  In 'Settings' add a new Config Var called 'CLIENT_ORIGIN' and set that to the URL for your deployed React application.
-3.  Then add another Config Var called 'CLIENT_ORIGIN_DEV' and enter the URL of your Gitpod preview link, remembering to remove the trailing slash at the end. Gitpod occasionally changes this URL so keep an eye on it, as you are working on your project.
-4.  Go back into your frontend Gitpod workspace, and install the Axios library using the command 'npm install axios'.
-5.  Create a folder called 'API' and inside it create a file called 'axiosDefaults'.
-6.  import axios at the top of the file
-7.  Define your baseURL which is the unique URL of your deployed API project. 
-8.  Set the content-type header to multi-part/form-data as the API will need to deal with images as well as text in it's requests.
-9.  In order to avoid any CORS issues, set withCredentials to True.
-10.  Import this file into App.js to be used across all pages
+- Under 'Settings', add a new Config Var named CLIENT_ORIGIN and set it to the URL of your deployed React app.
+- Add another Config Var called CLIENT_ORIGIN_DEV, and enter your Gitpod preview URL (without the trailing slash).
+ Since Gitpod occasionally updates this URL, remember to check it periodically while working on your project.  
 
-### Fork this Project Repository
+Switch back to your frontend Gitpod workspace and install Axios using:
+- 'npm install axios'
+- Create a new folder named API, and inside it, create a file called axiosDefaults.js.
+- Import axios at the beginning of this file.
+- Set the baseURL to match the deployed API’s unique URL.
+- Ensure that the Content-Type header is set to multipart/form-data since the API will handle both images and text.
+- To prevent CORS issues, enable withCredentials by setting it to true.
+- Import this file into App.js so that it can be used across your entire project.
 
-It is possible to make an independent copy of a GitHub Repository by forking the GitHub account. The copy can then be viewed and it is also possible to make changes in the copy without affecting the original repository. To fork the repository, follow these steps:
+  
+**Forking This Repository**
+You can create an independent copy of a GitHub repository by forking it.  
+This allows you to modify the forked version without affecting the original project.  
 
-1.  After logging in to GitHub, locate the repository. On the top right side of the page there is a 'Fork' button. Click on the button to create a copy of the original repository.
+To fork a repository:
 
-### Clone this Project Repository
+- Sign in to GitHub and navigate to the repository.
+- Click the 'Fork' button in the upper-right corner to create your own version of the repository.  
 
-A Git clone creates a linked copy of the project that will continue to synchronize with the original repository. In order to create a clone, you can click on the 'Code' button inside the selected repository and then select the 'Clone' option from the dropdown list.
+**Cloning This Repository**
+A Git clone creates a connected copy of a repository that remains synced with the original.  
+
+To clone a project:
+
+- Open the repository on GitHub.
+- Click the 'Code' button and choose the 'Clone' option from the dropdown menu.
+
 
 <br><br>
 
