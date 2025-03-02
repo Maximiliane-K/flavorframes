@@ -1,6 +1,6 @@
 <h1  align="center">FlavorFrames</h1>
 
-This is the readme for the FlavorFrames project's frontend. For more information about the backend, please visit [this link]([https://github.com/SamarZiadat/youi_drf_api](https://github.com/Maximiliane-K/flavorframes_drf_api/blob/main/README.md)).
+This is the readme for the FlavorFrames project's frontend. For more information about the backend, please visit [this link](https://github.com/Maximiliane-K/flavorframes_drf_api).
 
 FlavorFrames is a social platform designed for food lovers to share and discover restaurants, cafes, and culinary experiences through images and links. The name FlavorFrames represents the fusion of flavors and visuals, allowing users to frame and showcase their favorite dining experiences.
 
