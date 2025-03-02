@@ -706,6 +706,7 @@ To clone a project:
 
 -   [React Bootstrap documentation:](https://react-bootstrap.netlify.app/)  - Documentation used for styling and to build responsive web pages
 -   [Code Institute:](https://codeinstitute.net/)  Walkthrough modules for the Moments app
+-   [SamarZiadat](https://github.com/SamarZiadat/youi_frontend) Was used as reference for the README.md and TESTING.md
 -   [Code Institute Tutor Support:](https://app.slack.com/)  For help and support
 -   [React documentation:](https://legacy.reactjs.org/docs/getting-started.html)  Everything you need to know about React
 -   [Stack Overflow:](https://stackoverflow.com/)  For troubleshooting and FAQ
