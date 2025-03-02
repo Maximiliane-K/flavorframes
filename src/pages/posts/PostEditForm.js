@@ -33,10 +33,17 @@ function PostEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}/`);
-        const { content, image, location_link, is_owner } = data;
+        const {
+          content,
+          image,
+          location_link,
+          is_owner,
+          owner,
+          owner_profile,
+        } = data;
 
         is_owner
-          ? setPostData({ content, image, location_link })
+          ? setPostData({ content, image, location_link, owner, owner_profile })
           : history.push("/");
       } catch (err) {
         //console.log(err);
@@ -135,7 +142,10 @@ function PostEditForm() {
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.CancelCreate}`} type="submit">
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.CancelCreate}`}
+        type="submit"
+      >
         save
       </Button>
     </div>

@@ -5,6 +5,9 @@
   margin-bottom: 20px !important;
 }
 
+.ImgHeight {
+  max-height: 100%;
+}
 
 .Post figure,
 h5 {
