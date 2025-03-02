@@ -26,7 +26,7 @@ No errors were found when the deployed URL was passed through W3C HTML Validatio
 
 No errors or warnings were found when the deployed URL was passed through the W3C CSS Validation.
 
-![CSS](https://res.cloudinary.com/maxiscloud/image/upload/v1740909828/Screenshot_2025-03-02_at_10.55.21_k96suu.png
+![CSS](https://res.cloudinary.com/maxiscloud/image/upload/v1740909828/Screenshot_2025-03-02_at_10.55.21_k96suu.png)
 
 
 ## Manual Testing
@@ -119,6 +119,10 @@ No errors or warnings were found when the deployed URL was passed through the W3
 
 ### Lighthouse Testing
 
+Performed a Lighthouse audit on the deployed application, achieving scores of  
+66 (Performance), 80 (Accessibility), 78 (Best Practices), and 92 (SEO), identifying areas for further optimization.
+
+![Lighthouse](https://res.cloudinary.com/maxiscloud/image/upload/v1740914977/Screenshot_2025-03-02_at_12.29.30_ygsr08.png)
 
 
 ### Known Bugs
