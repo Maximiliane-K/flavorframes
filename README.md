@@ -1,6 +1,6 @@
-<h1  align="center">flavorframes</h1>
+<h1  align="center">FlavorFrames</h1>
 
-This the readme for the flavorframes project's frontend. For more information about the backend, please visit [this link]([https://github.com/SamarZiadat/youi_drf_api](https://github.com/Maximiliane-K/flavorframes_drf_api/blob/main/README.md)).
+This is the readme for the FlavorFrames project's frontend. For more information about the backend, please visit [this link]([https://github.com/SamarZiadat/youi_drf_api](https://github.com/Maximiliane-K/flavorframes_drf_api/blob/main/README.md)).
 
 FlavorFrames is a social platform designed for food lovers to share and discover restaurants, cafes, and culinary experiences through images and links. The name FlavorFrames represents the fusion of flavors and visuals, allowing users to frame and showcase their favorite dining experiences.
 
@@ -553,7 +553,7 @@ Each profile includes:
 User-Specific Actions  
 For their own profile, users can:
 
-- Edit their profile details, including discription, location, and profile picture
+- Edit their profile details, including description, location, and profile picture
 - Update their username and password
 
 ![PostEdit](https://res.cloudinary.com/maxiscloud/image/upload/v1740906927/Screenshot_2025-03-02_at_10.15.08_a7ngjk.png)
@@ -592,7 +592,7 @@ These wireframe served as the foundation for the UI/UX design.
 
 ### Design  
 
-#### Colour Scheme  
+#### Color Scheme  
 
 FlavorFrames follows a carefully selected color scheme designed to create a warm, inviting, and visually appealing experience. The combination of orange, black, and green was inspired by the aesthetics of a classic burger house, evoking a sense of comfort, freshness, and bold flavors.
 
@@ -627,20 +627,20 @@ This font enhances the user experience by maintaining a sleek and contemporary a
 ### Frameworks, Software and Web Applications
 
 - [React Bootstrap](https://react-bootstrap.github.io/)  - A CSS framework that helps build solid, responsive, mobile-first sites
--   [Figma](https://www.figma.com/)  - Used to create the wireframes
+- [Figma](https://www.figma.com/)  - Used to create the wireframes
 - [Coolors](https://coolors.co/)  - Used to pick the colour scheme of the website 
--   [Github](https://github.com/)  - Used to host the repository, store the commit history and manage the project board containing user stories
--   [Heroku](https://en.wikipedia.org/wiki/Heroku)  - A cloud platform that the application is deployed to
--   [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)  - Used to test site performance
+- [Github](https://github.com/)  - Used to host the repository, store the commit history and manage the project board containing user stories
+- [Heroku](https://en.wikipedia.org/wiki/Heroku)  - A cloud platform that the application is deployed to
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)  - Used to test site performance
 - [Canva](https://www.canva.com/)  - Used to generate the FlavorFrames logo
--   [Am i Responsive?](https://amiresponsive.co.uk/) - Used to generate the mockup of the final website on several devices
--   [Favicon](https://favicon.io/)  - Used to create the favicon
--   [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/)  - Used to debug and test responsiveness
+- [Am i Responsive?](https://amiresponsive.co.uk/) - Used to generate the mockup of the final website on several devices
+- [Favicon](https://favicon.io/)  - Used to create the favicon
+- [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/)  - Used to debug and test responsiveness
 - [Google Fonts](https://fonts.google.com/specimen/DM+Sans) - Used to import the website font 
--   [Cloudinary](https://cloudinary.com/)  - A service that hosts image files in the project.
--   [HTML Validation](https://validator.w3.org/)  - Used to validate HTML code
--   [CSS Validation](https://jigsaw.w3.org/css-validator/)  - Used to validate CSS code
--   [JSHint Validation](https://jshint.com/)  - Used to validate JavaScript code
+- [Cloudinary](https://cloudinary.com/)  - A service that hosts image files in the project.
+- [HTML Validation](https://validator.w3.org/)  - Used to validate HTML code
+- [CSS Validation](https://jigsaw.w3.org/css-validator/)  - Used to validate CSS code
+- [JSHint Validation](https://jshint.com/)  - Used to validate JavaScript code
 - [Pexels](https://www.pexels.com/) - Free stock image provider for posts, events and avatars that were uploaded 
 - [Font Awesome](https://fontawesome.com/) - Used for icons across UI
 
@@ -648,7 +648,7 @@ This font enhances the user experience by maintaining a sleek and contemporary a
 
 ## Testing
 
-Please click [here](https://github.com/SamarZiadat/youi_frontend/blob/main/TESTING.md) to read more information about testing you.i's frontend.
+Please click [here](https://github.com/Maximiliane-K/flavorframes/blob/main/TESTING.md) to read more information about the FlavorFrames frontend testing.
 
 <br><br>
 
