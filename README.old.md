@@ -30,7 +30,7 @@ View the live project [here](https://flavorframes-ec3ead3959ab.herokuapp.com/).
 	    -   [Design](#design)
 -   [Technologies](#technologies)
 -   [Testing](#testing)
--   [Deployment](#development)
+-   [Deployment](#deployment)
 -   [Credits](#credits)
 
 ## User Experience Design
@@ -564,6 +564,141 @@ For other users' profiles, logged-in users can:
 - Follow or unfollow them
   
 The Profile Page provides an organized space where users can showcase their content, track their social engagement, and stay connected with the FlavorFrames community.
+
+<br><br>
+
+### Future Features
+
+- Add a bookmark feature for posts and events.
+- Enhance event attendance functionality by adding an "Interested" option alongside "Attending.
+- Implement date ranges and time selection for events.
+- Ensure consistent rendering of post images so they always appear the same size.
+- Enable automatic login after successful registration.
+
+<br><br>
+
+## The Skeleton Plane
+
+### Wireframes
+
+The wireframe for this project was designed using Figma to create a structured and user-friendly layout.  
+These wireframe served as the foundation for the UI/UX design.
+
+![Wireframe](https://res.cloudinary.com/maxiscloud/image/upload/v1740907691/Screenshot_2025-03-02_at_10.27.31_yv3pjp.png)
+
+<br><br>
+
+## The Surface Plane  
+
+### Design  
+
+#### Colour Scheme  
+
+FlavorFrames follows a carefully selected color scheme designed to create a warm, inviting, and visually appealing experience. The combination of orange, black, and green was inspired by the aesthetics of a classic burger house, evoking a sense of comfort, freshness, and bold flavors.
+
+![Color sheme](https://res.cloudinary.com/maxiscloud/image/upload/v1740907871/flavorframes-colors_hwcntj.png)
+
+
+#### Logo
+The FlavorFrames logo embodies the brand’s essence, combining a bold and inviting design.  
+The orange background reinforces the warm and appetizing feel, while the strong black typography adds a sense of sophistication and contrast.
+
+![Logo](https://res.cloudinary.com/maxiscloud/image/upload/v1740908159/Screenshot_2025-03-02_at_10.35.41_cey58g.png)
+
+
+#### Typography
+
+FlavorFrames uses DM Sans as its primary typeface, chosen for its modern, clean, and highly readable design.  
+This font enhances the user experience by maintaining a sleek and contemporary aesthetic across the platform.
+
+![Font](https://fonts.google.com/specimen/DM+Sans)
+
+<br><br>
+
+## Technologies
+
+### Languages
+
+-   [HTML5](https://en.wikipedia.org/wiki/HTML)  - Provides the content and structure for the website
+-   [CSS3](https://en.wikipedia.org/wiki/CSS)  - Provides the styling for the website
+-   [JavaScript](https://en.wikipedia.org/wiki/JavaScript)  - Provides interactive elements of the website
+-   [React.js](https://en.wikipedia.org/wiki/React_(software))  - Provides the base for the frontend components
+
+### Frameworks, Software and Web Applications
+
+- [React Bootstrap](https://react-bootstrap.github.io/)  - A CSS framework that helps build solid, responsive, mobile-first sites
+-   [Figma](https://www.figma.com/)  - Used to create the wireframes
+- [Coolors](https://coolors.co/)  - Used to pick the colour scheme of the website 
+-   [Github](https://github.com/)  - Used to host the repository, store the commit history and manage the project board containing user stories
+-   [Heroku](https://en.wikipedia.org/wiki/Heroku)  - A cloud platform that the application is deployed to
+-   [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)  - Used to test site performance
+- [Canva](https://www.canva.com/)  - Used to generate the FlavorFrames logo
+-   [Am i Responsive?](https://amiresponsive.co.uk/) - Used to generate the mockup of the final website on several devices
+-   [Favicon](https://favicon.io/)  - Used to create the favicon
+-   [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/)  - Used to debug and test responsiveness
+- [Google Fonts](https://fonts.google.com/specimen/DM+Sans) - Used to import the website font 
+-   [Cloudinary](https://cloudinary.com/)  - A service that hosts image files in the project.
+-   [HTML Validation](https://validator.w3.org/)  - Used to validate HTML code
+-   [CSS Validation](https://jigsaw.w3.org/css-validator/)  - Used to validate CSS code
+-   [JSHint Validation](https://jshint.com/)  - Used to validate JavaScript code
+- [Pexels](https://www.pexels.com/) - Free stock image provider for posts, events and avatars that were uploaded 
+- [Font Awesome](https://fontawesome.com/) - Used for icons across UI
+
+<br><br>
+
+## Testing
+
+Please click [here](https://github.com/SamarZiadat/youi_frontend/blob/main/TESTING.md) to read more information about testing you.i's frontend.
+
+<br><br>
+
+### Deployment
+
+Once you have created a new gitpod workspace and set up the new project, you are ready to deploy to Heroku.
+
+1.  In your heroku account, select Create New App, and give it a unique name related to your project.
+2.  Select a region corresponding to where you live and click 'Create App'.
+3.  Head into the 'Deploy' tab select GitHub as the 'deployment method', find your project repository and click 'Connect'.
+4.  Click 'Deploy branch' to trigger Heroku to start building the application.
+5.  Once you see the message saying 'build succeeded' you can click 'Open App' to see your application in the browser.
+
+### Connect React Frontend to the API backend
+
+Once you have set up the workspace and done a basic deploy to Heroku, you can connect the react workspace to your API, in order to send data to the API
+
+1.  In the Heroku dashboard, go into the API application settings
+2.  In 'Settings' add a new Config Var called 'CLIENT_ORIGIN' and set that to the URL for your deployed React application.
+3.  Then add another Config Var called 'CLIENT_ORIGIN_DEV' and enter the URL of your Gitpod preview link, remembering to remove the trailing slash at the end. Gitpod occasionally changes this URL so keep an eye on it, as you are working on your project.
+4.  Go back into your frontend Gitpod workspace, and install the Axios library using the command 'npm install axios'.
+5.  Create a folder called 'API' and inside it create a file called 'axiosDefaults'.
+6.  import axios at the top of the file
+7.  Define your baseURL which is the unique URL of your deployed API project. 
+8.  Set the content-type header to multi-part/form-data as the API will need to deal with images as well as text in it's requests.
+9.  In order to avoid any CORS issues, set withCredentials to True.
+10.  Import this file into App.js to be used across all pages
+
+### Fork this Project Repository
+
+It is possible to make an independent copy of a GitHub Repository by forking the GitHub account. The copy can then be viewed and it is also possible to make changes in the copy without affecting the original repository. To fork the repository, follow these steps:
+
+1.  After logging in to GitHub, locate the repository. On the top right side of the page there is a 'Fork' button. Click on the button to create a copy of the original repository.
+
+### Clone this Project Repository
+
+A Git clone creates a linked copy of the project that will continue to synchronize with the original repository. In order to create a clone, you can click on the 'Code' button inside the selected repository and then select the 'Clone' option from the dropdown list.
+
+<br><br>
+
+## Credits
+
+-   [React Bootstrap documentation:](https://react-bootstrap.netlify.app/)  - Documentation used for styling and to build responsive web pages
+-   [Code Institute:](https://codeinstitute.net/)  Walkthrough modules for the Moments app
+-   [Code Institute Tutor Support:](https://app.slack.com/)  For help and support
+-   [React documentation:](https://legacy.reactjs.org/docs/getting-started.html)  Everything you need to know about React
+-   [Stack Overflow:](https://stackoverflow.com/)  For troubleshooting and FAQ
+-   [W3Schools:](https://www.w3schools.com/)  Online Web Tutorials
+
+
 
 
 
