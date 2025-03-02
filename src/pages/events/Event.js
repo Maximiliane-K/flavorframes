@@ -37,6 +37,8 @@ const Event = (props) => {
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
+        if (!currentUser) return;
+
         const { data } = await axiosRes.get(`/attendance/?event=${id}`);
         setAttendingUsers(data.attending);
         setAttendingCount(data.attending_count);
@@ -127,36 +129,41 @@ const Event = (props) => {
 
       <Card.Body>
         {description && <Card.Text>{description}</Card.Text>}
-        <div>
-          <button
-            className={`${btnStyles.Button} ${status === "attending" ? btnStyles.Active : ""}`}
-            onClick={handleAttendance}
-          >
-            {status === "attending" ? (
-              <>
-                <i className="fas fa-check-circle"></i> Attending ({attendingCount || 0})
-              </>
-            ) : (
-              <>
-                <i className="fas fa-plus-circle"></i> Attend ({attendingCount || 0})
-              </>
-            )}
-          </button>
-        </div>
+        
+        {currentUser && (
+          <div>
+            <button
+              className={`${btnStyles.Button} ${status === "attending" ? btnStyles.Active : ""}`}
+              onClick={handleAttendance}
+            >
+              {status === "attending" ? (
+                <>
+                  <i className="fas fa-check-circle"></i> Attending ({attendingCount || 0})
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-plus-circle"></i> Attend ({attendingCount || 0})
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </Card.Body>
 
-      <Card.Body>
-        <h6>Attending:</h6>
-        <div className={styles.UserList}>
-          {attendingUsers.length > 0 ? (
-            attendingUsers.slice(0, 3).map((user) => (
-              <Avatar key={user.id} src={user.profile_image} height={40} />
-            ))
-          ) : (
-            <p>No one attending yet</p>
-          )}
-        </div>
-      </Card.Body>
+      {currentUser && (
+        <Card.Body>
+          <h6>Attending:</h6>
+          <div className={styles.UserList}>
+            {attendingUsers.length > 0 ? (
+              attendingUsers.slice(0, 3).map((user) => (
+                <Avatar key={user.id} src={user.profile_image} height={40} />
+              ))
+            ) : (
+              <p>No one attending yet</p>
+            )}
+          </div>
+        </Card.Body>
+      )}
     </Card>
   );
 };
